@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die Wachstumshelden – Für Geschäftsführer mit 5–50 Mitarbeitern</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:   #45AF7D;
+  --blue:    #001639;
+  --light:   #F9FAFB;
+  --dark:    #111827;
+  --orange:  #F97316;
+  --border:  #E5E7EB;
+  --white:   #ffffff;
+  --gray-mid: #6B7280;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── UTILITY ── */
+.container { max-width: 1160px; margin: 0 auto; }
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.h1 {
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 900;
+  color: var(--blue);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+.h2 {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 900;
+  color: var(--blue);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.h2 .green { color: var(--green); }
+.body-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.75;
+}
+.body-text.muted { color: var(--gray-mid); }
+.btn {
+  display: inline-block;
+  padding: 15px 32px;
+  background: var(--orange);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn:hover { background: #EA6A0A; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+}
+.btn-outline:hover { background: var(--orange); color: white; }
+
+/* ── URGENCY BAR ── */
+.urgency-bar {
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  padding: 11px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.urgency-bar strong { color: var(--orange); font-weight: 800; }
+
+/* ── NAV ── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.nav-logo {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--green); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--blue);
+  padding: 80px 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(69,175,125,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Callout */
+.hero-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(69,175,125,0.1);
+  border: 1px solid rgba(69,175,125,0.2);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 4px;
+  margin-bottom: 28px;
+}
+.pulse {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-h1 {
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 900;
+  color: white;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+.hero-h1 .green { color: var(--green); }
+.hero-h1 .dim {
+  text-decoration: line-through;
+  opacity: 0.35;
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.72;
+  margin-bottom: 40px;
+  max-width: 560px;
+}
+
+/* Value Equation */
+.veq {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr 28px 1fr;
+  align-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 40px;
+  gap: 0;
+}
+.veq-cell { text-align: center; }
+.veq-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 5px;
+}
+.veq-val {
+  font-size: 13px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.3;
+}
+.veq-val.g { color: var(--green); }
+.veq-val.o { color: #FCA5A5; font-size: 12px; }
+.veq-op {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.2);
+}
+
+/* Stats */
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hst-n {
+  display: block;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hst-l {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.4;
+}
+
+/* Strip */
+.hero-strip {
+  max-width: 1160px;
+  margin: 56px auto 0;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.strip-i {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.42);
+}
+.strip-i span { color: var(--green); font-weight: 800; font-size: 14px; }
+
+/* ── FORM CARD ── */
+.form-card {
+  background: white;
+  border-radius: 14px;
+  padding: 36px 32px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  top: 84px;
+}
+.form-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+  display: block;
+}
+.form-h {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 6px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.form-sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.fg { margin-bottom: 13px; }
+.fg label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.fg input,
+.fg select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue);
+  background: #FAFBFC;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+.fg select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+.fg input::placeholder { color: #C4C9D4; font-weight: 400; }
+.fg input:focus,
+.fg select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(69,175,125,0.12);
+  background: white;
+}
+.fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.form-submit {
+  width: 100%;
+  padding: 15px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: 6px;
+}
+.form-submit:hover { background: #EA6A0A; transform: translateY(-1px); }
+
+.form-guar {
+  margin-top: 14px;
+  background: rgba(69,175,125,0.06);
+  border: 1px solid rgba(69,175,125,0.18);
+  border-radius: 7px;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1A5C3A;
+  line-height: 1.55;
+}
+.form-guar strong { font-weight: 800; }
+.form-note {
+  font-size: 11px;
+  color: var(--gray-mid);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Success */
+.form-success { display: none; text-align: center; padding: 24px 0; }
+.success-icon {
+  width: 64px; height: 64px;
+  background: rgba(69,175,125,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 30px;
+}
+.form-success h3 {
+  font-size: 20px; font-weight: 900; color: var(--blue); margin-bottom: 10px;
+}
+.form-success p { font-size: 14px; color: var(--gray-mid); line-height: 1.65; }
+
+/* ── SECTIONS ── */
+.sec { padding: 96px 48px; }
+.sec-inner { max-width: 1160px; margin: 0 auto; }
+.sec-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  line-height: 1.72;
+  max-width: 580px;
+  margin-bottom: 56px;
+}
+
+/* ── PROBLEM ── */
+.problem { background: var(--light); }
+.prob-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.prob-card {
+  background: white;
+  border-radius: 10px;
+  padding: 28px 24px;
+  border-left: 3px solid #FCA5A5;
+}
+.prob-n {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #DC2626;
+  margin-bottom: 10px;
+}
+.prob-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.prob-card p {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  line-height: 1.65;
+}
+.prob-cost {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #DC2626;
+  background: rgba(220,38,38,0.07);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ── VALUE STACK ── */
+.vstack { background: white; }
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.stack-card {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.15s;
+}
+.stack-card:hover { border-color: var(--green); }
+.stack-ico { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.stack-h {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+.stack-p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.stack-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  background: rgba(69,175,125,0.08);
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Total Box */
+.vtotal {
+  background: var(--blue);
+  border-radius: 12px;
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+.vt-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+}
+.vt-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.vt-list li {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.vt-list li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 900;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.vt-price-wrap { text-align: center; flex-shrink: 0; }
+.vt-was {
+  font-size: 14px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+.vt-price {
+  font-size: 50px;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.vt-per { font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 20px; }
+.vt-btn {
+  display: block;
+  background: var(--orange);
+  color: white;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.vt-btn:hover { background: #EA6A0A; }
+
+/* ── FAST WIN ── */
+.fastwin {
+  background: var(--green);
+  padding: 72px 48px;
+}
+.fw-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.fw-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 14px;
+}
+.fw-h {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.fw-p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.72;
+}
+.fw-steps { display: flex; flex-direction: column; gap: 14px; }
+.fw-step {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.fw-n {
+  font-size: 20px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 26px;
+}
+.fw-sh {
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 3px;
+}
+.fw-sp {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.5;
+}
+
+/* ── TEAM ── */
+.team { background: var(--light); }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.team-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,22,57,0.1);
+}
+.team-av {
+  height: 140px;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--green);
+  letter-spacing: -0.01em;
+}
+.team-body { padding: 22px 20px; }
+.team-name {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+.team-role {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.team-bio {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  line-height: 1.6;
+}
+
+/* ── TEAM PHOTO ── */
+.team-photo {
+  background: var(--light);
+  padding: 0;
+  overflow: hidden;
+}
+.team-photo-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 48px 72px;
+}
+.team-photo-img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+.team-photo-caption {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-mid);
+  letter-spacing: 0.03em;
+}
+
+/* ── GUARANTEE ── */
+.guarantee { background: var(--blue); padding: 96px 48px; }
+.guar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.guar-badge {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(69,175,125,0.1);
+  border: 2px solid rgba(69,175,125,0.25);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin-bottom: 32px; text-align: center;
+}
+.guar-badge-icon { font-size: 42px; margin-bottom: 6px; }
+.guar-badge-text {
+  font-size: 10px; font-weight: 800;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.guar-h {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.guar-h .g { color: var(--green); }
+.guar-p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.72;
+}
+.guar-fine {
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.25);
+  font-style: italic;
+  line-height: 1.5;
+}
+.guar-list { display: flex; flex-direction: column; gap: 14px; }
+.guar-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.guar-ico { font-size: 20px; flex-shrink: 0; }
+.guar-ih {
+  font-size: 14px; font-weight: 800; color: white; margin-bottom: 4px;
+}
+.guar-ip {
+  font-size: 13px; font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.55;
+}
+
+/* ── FAQ ── */
+.faq { background: var(--light); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.faq-card {
+  background: white;
+  border-radius: 10px;
+  padding: 24px 22px;
+}
+.faq-q {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.faq-a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  line-height: 1.65;
+}
+
+/* ── PRICING ── */
+.pricing { background: white; }
+.pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 780px;
+}
+.price-card {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 32px;
+  position: relative;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.price-card:hover { border-color: var(--green); transform: translateY(-3px); }
+.price-card.featured {
+  background: var(--blue);
+  border-color: var(--green);
+}
+.price-badge {
+  position: absolute;
+  top: -13px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--orange);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-period {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.price-amount {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--blue);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-card.featured .price-amount { color: white; }
+.price-amount sub {
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.55;
+  vertical-align: baseline;
+}
+.price-note {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  margin-bottom: 26px;
+  margin-top: 5px;
+}
+.price-card.featured .price-note { color: rgba(255,255,255,0.45); }
+.price-features { list-style: none; margin-bottom: 30px; }
+.price-features li {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  padding: 9px 0;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.price-card.featured .price-features li {
+  color: rgba(255,255,255,0.78);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.price-features li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 900;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.price-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--orange);
+  border: 2px solid var(--orange);
+  color: white;
+}
+.price-btn:hover { background: #EA6A0A; border-color: #EA6A0A; }
+
+/* ── SLOGAN BAND ── */
+.slogan-band {
+  background: var(--green);
+  padding: 28px 48px;
+  text-align: center;
+}
+.slogan-text {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* ── FINAL CTA ── */
+.final {
+  background: var(--blue);
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 900px; height: 400px;
+  background: radial-gradient(ellipse, rgba(69,175,125,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.final-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+  display: block;
+  position: relative;
+}
+.final-h {
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  margin-bottom: 20px;
+  position: relative;
+}
+.final-h .o { color: var(--orange); }
+.final-p {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.72;
+  max-width: 520px;
+  margin: 0 auto 48px;
+  position: relative;
+}
+.final-note {
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.22);
+  position: relative;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #000D1F;
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.foot-logo {
+  font-size: 14px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.45);
+}
+.foot-logo span { color: var(--green); }
+.foot-links { display: flex; gap: 24px; }
+.foot-links a {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.22);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.foot-links a:hover { color: rgba(255,255,255,0.6); }
+
+/* ── ANIMATIONS ── */
+.fi {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fi.v { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 60px 20px 0; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .form-card { position: static; }
+  .veq { grid-template-columns: 1fr 1fr; }
+  .veq-op { display: none; }
+  .sec { padding: 64px 20px; }
+  .fastwin { padding: 64px 20px; }
+  .fw-inner { grid-template-columns: 1fr; gap: 40px; }
+  .prob-grid { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .vtotal { grid-template-columns: 1fr; }
+  .vt-price-wrap { text-align: left; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .guarantee { padding: 64px 20px; }
+  .guar-inner { grid-template-columns: 1fr; gap: 40px; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .pricing-cards { grid-template-columns: 1fr; max-width: 100%; }
+  .final { padding: 80px 20px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
+  .fg-row { grid-template-columns: 1fr; }
+  .hero-strip { flex-wrap: wrap; gap: 14px; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .slogan-band { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  Wir nehmen aktuell nur <strong>12 Unternehmer</strong> in die neue Kohorte auf – danach geschlossene Runde.
+</div>
+
+<!-- NAV -->
+<nav>
+  <img src="WH-logo.png" alt="Die Wachstumshelden" style="height:38px; display:block;">
+  <a href="#formular" class="btn" style="padding:10px 22px;font-size:13px;">Gespräch sichern</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- COPY -->
+    <div>
+      <div class="hero-callout">
+        <span class="pulse"></span>
+        Für Geschäftsführer &amp; Unternehmer mit 5–50 Mitarbeitern
+      </div>
+
+      <h1 class="hero-h1">
+        Planbar wachsen –<br>
+        <span class="green">ohne Bauchgefühl,</span><br>
+        Chaos und<br>
+        <span class="dim">teure Berater.</span>
+      </h1>
+
+      <p class="hero-sub">
+        52× im Jahr live mit vier Experten für Marketing, Sales, Strukturen, Recruiting und Leadership. Du schickst deine Frage ein – nächsten Mittwoch hast du die Antwort und einen klaren nächsten Schritt.
+      </p>
+
+      <div class="veq">
+        <div class="veq-cell">
+          <div class="veq-label">Was du bekommst</div>
+          <div class="veq-val g">Planbarer Umsatz &amp; Wachstum</div>
+        </div>
+        <div class="veq-op">×</div>
+        <div class="veq-cell">
+          <div class="veq-label">Warum es funktioniert</div>
+          <div class="veq-val g">4 Experten, 1 System</div>
+        </div>
+        <div class="veq-op">÷</div>
+        <div class="veq-cell">
+          <div class="veq-label">Ohne</div>
+          <div class="veq-val o">Zeitverlust &amp; Aufwand</div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <span class="hst-n">52×</span>
+          <span class="hst-l">Live-Sessions<br>pro Jahr</span>
+        </div>
+        <div>
+          <span class="hst-n">4</span>
+          <span class="hst-l">Experten in<br>einer Session</span>
+        </div>
+        <div>
+          <span class="hst-n">7 Tage</span>
+          <span class="hst-l">bis zur ersten<br>Antwort</span>
+        </div>
+        <div>
+          <span class="hst-n">1 Std.</span>
+          <span class="hst-l">Aufwand<br>pro Woche</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card" id="formular">
+      <span class="form-tag">Kostenlos &amp; unverbindlich</span>
+      <h2 class="form-h">Strategiegespräch sichern</h2>
+      <p class="form-sub">Kein Pitch. Klare Analyse deiner Lage. Anruf innerhalb 24h.</p>
+
+      <form id="leadForm">
+        <div class="fg-row">
+          <div class="fg">
+            <label>Vorname *</label>
+            <input type="text" placeholder="Max" required>
+          </div>
+          <div class="fg">
+            <label>Nachname *</label>
+            <input type="text" placeholder="Mustermann" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label>E-Mail *</label>
+          <input type="email" placeholder="max@firma.de" required>
+        </div>
+        <div class="fg">
+          <label>Telefon *</label>
+          <input type="tel" placeholder="+49 170 000 0000" required>
+        </div>
+        <div class="fg">
+          <label>Mitarbeiteranzahl *</label>
+          <select required>
+            <option value="" disabled selected>Bitte wählen</option>
+            <option>1–5 Mitarbeiter</option>
+            <option>6–20 Mitarbeiter</option>
+            <option>21–50 Mitarbeiter</option>
+            <option>50+ Mitarbeiter</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Dein größter Engpass *</label>
+          <select required>
+            <option value="" disabled selected>Bitte wählen</option>
+            <option>Marketing &amp; Neukundengewinnung</option>
+            <option>Vertrieb &amp; Abschlüsse</option>
+            <option>Strukturen &amp; Prozesse</option>
+            <option>Recruiting &amp; Team aufbauen</option>
+            <option>Leadership &amp; Führung</option>
+            <option>Mehrere Bereiche gleichzeitig</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Jahresumsatz (ca.) *</label>
+          <select required>
+            <option value="" disabled selected>Bitte wählen</option>
+            <option>Unter 500.000 €</option>
+            <option>500.000 € – 1 Mio. €</option>
+            <option>1 – 3 Mio. €</option>
+            <option>3 – 10 Mio. €</option>
+            <option>Über 10 Mio. €</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Jetzt Gespräch sichern →</button>
+        <div class="form-guar">
+          <strong>🛡 Erste-Session-Garantie:</strong> Keine direkt umsetzbare Antwort in deiner ersten Session? Erster Monat vollständig zurück.
+        </div>
+        <p class="form-note">Unverbindlich · Kein Kurs · Kein Fernunterricht<br>Anruf innerhalb 24h</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✓</div>
+        <h3>Anfrage eingegangen.</h3>
+        <p>Unser Team meldet sich innerhalb von 24 Stunden bei dir. Kein Pitch – klares Gespräch.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-strip">
+    <div class="strip-i"><span>✓</span> Keine Theorie – nur umsetzbare Antworten</div>
+    <div class="strip-i"><span>✓</span> 100% digital &amp; ortsunabhängig</div>
+    <div class="strip-i"><span>✓</span> Kein Kurs, kein Zertifikat, kein Modul</div>
+    <div class="strip-i"><span>✓</span> Vier Blickwinkel – eine Session</div>
+  </div>
+</section>
+
+<!-- SLOGAN -->
+<div class="slogan-band">
+  <div class="slogan-text">Gemeinsam Erfolg schreiben</div>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec problem">
+  <div class="sec-inner">
+    <span class="tag fi">Das Problem</span>
+    <h2 class="h2 fi" style="margin-bottom:14px;">Dein Unternehmen kostet dich täglich Geld –<br>weil diese Probleme ungelöst bleiben.</h2>
+    <p class="sec-sub fi">Nicht wegen mangelndem Einsatz. Sondern weil klare Systeme, der richtige Blick von außen und echtes Sparring fehlen.</p>
+    <div class="prob-grid">
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 01</div>
+        <h3>Marketing verbrennt Budget ohne Plan</h3>
+        <p>Kampagnen laufen, Geld fließt – aber planbare Kundenanfragen entstehen nicht. Jeder Monat ist ein neues Experiment.</p>
+        <span class="prob-cost">↓ Umsatz, der täglich verloren geht</span>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 02</div>
+        <h3>Vertrieb basiert auf Bauchgefühl</h3>
+        <p>Abschlüsse entstehen zufällig. Kein System, keine Pipeline – Umsatz ist nicht berechenbar und hängt an Einzelpersonen.</p>
+        <span class="prob-cost">↓ Deals, die du jeden Monat verlierst</span>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 03</div>
+        <h3>Du bist das Nadelöhr deines Unternehmens</h3>
+        <p>Urlaub? Unmöglich. Krank? Das Unternehmen steht still. Alles läuft über dich – Entscheidungen, Freigaben, Rückfragen.</p>
+        <span class="prob-cost">↓ Deine Zeit, die du nie zurückholst</span>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 04</div>
+        <h3>Recruiting kostet Nerven, bringt wenig</h3>
+        <p>Die Richtigen bewerben sich nicht. Wer kommt, passt nicht oder geht nach kurzer Zeit wieder. Fachkräftemangel als Dauerbelastung.</p>
+        <span class="prob-cost">↓ Tausende € Recruiting-Kosten umsonst</span>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 05</div>
+        <h3>Führung bleibt reaktiv statt proaktiv</h3>
+        <p>Du löschst Feuer statt dein Unternehmen zu führen. Das Team wartet auf Anweisungen. Wachstum scheitert an Führung – nicht an Umsatz.</p>
+        <span class="prob-cost">↓ Potenzial, das dein Team nie entfaltet</span>
+      </div>
+      <div class="prob-card fi">
+        <div class="prob-n">Problem 06</div>
+        <h3>Wachstum erzeugt Chaos statt Freiheit</h3>
+        <p>Mehr Umsatz bedeutet mehr Probleme. Systeme brechen beim nächsten Schritt. Wachstum fühlt sich gefährlich an, nicht befreiend.</p>
+        <span class="prob-cost">↓ Jede Wachstumsstufe kostet dich</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE STACK -->
+<section class="sec vstack">
+  <div class="sec-inner">
+    <span class="tag fi">Was du bekommst</span>
+    <h2 class="h2 fi" style="margin-bottom:14px;">Ein Angebot, das sich mit nichts<br>anderem <span class="green">vergleichen lässt.</span></h2>
+    <p class="sec-sub fi">Kein Kurs. Kein Coaching. Keine Agentur. Ein System aus vier Experten – wöchentlich live, direkt auf deine Fragen.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card fi">
+        <div class="stack-ico">📅</div>
+        <div>
+          <div class="stack-h">52× Wöchentliche Live-Sessions</div>
+          <div class="stack-p">Jeden Mittwoch live mit allen vier Experten. Du bringst deine aktuellste Frage – wir kommen vorbereitet mit klarer Antwort und dem nächsten Schritt.</div>
+          <span class="stack-badge">Marktwert: 4 × 300 €/h = 1.200 €/Session</span>
+        </div>
+      </div>
+      <div class="stack-card fi">
+        <div class="stack-ico">🎯</div>
+        <div>
+          <div class="stack-h">Vier Perspektiven in einer Session</div>
+          <div class="stack-p">Marketing, Sales, Strategie, Recruiting &amp; Leadership gleichzeitig. Kein einzelner Berater hat alle Antworten – wir schon.</div>
+          <span class="stack-badge">Kein anderes Programm bietet das</span>
+        </div>
+      </div>
+      <div class="stack-card fi">
+        <div class="stack-ico">📁</div>
+        <div>
+          <div class="stack-h">Transkriptionen &amp; Ressourcen im Memberbereich</div>
+          <div class="stack-p">Jede Session wird transkribiert. Du bekommst alle Inhalte schriftlich – plus weiterführende Ressourcen. Wissen, das sich aufbaut.</div>
+          <span class="stack-badge">Wachsende Wissensbibliothek</span>
+        </div>
+      </div>
+      <div class="stack-card fi">
+        <div class="stack-ico">📨</div>
+        <div>
+          <div class="stack-h">Fragen vorab einreichen – wir kommen vorbereitet</div>
+          <div class="stack-p">Bis Donnerstag einschicken. Wir bereiten uns vor. Keine improvisierten Antworten – durchdachter Input mit konkreten Schritten.</div>
+          <span class="stack-badge">Sofort umsetzbar ab nächstem Tag</span>
+        </div>
+      </div>
+      <div class="stack-card fi">
+        <div class="stack-ico">🤝</div>
+        <div>
+          <div class="stack-h">Community aus Unternehmern auf Augenhöhe</div>
+          <div class="stack-p">Die Fragen anderer öffnen dir die Augen für blinde Flecken im eigenen Business. Kooperationen entstehen. Netzwerk wächst.</div>
+          <span class="stack-badge">Peer-Learning schlägt jedes 1:1</span>
+        </div>
+      </div>
+      <div class="stack-card fi">
+        <div class="stack-ico">🚀</div>
+        <div>
+          <div class="stack-h">Kickoff-Analyse zu Beginn</div>
+          <div class="stack-p">Wir schauen uns dein Unternehmen an: Engpässe, Chancen, Prioritäten. Du startest nicht blind – du startest mit einem klaren Fahrplan.</div>
+          <span class="stack-badge">Normalerweise 2.500 € Strategieberatung</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vtotal fi">
+      <div>
+        <div class="vt-label">Was du bekommst</div>
+        <ul class="vt-list">
+          <li>52 Live-Sessions à 4 Experten (Marktwert: ~62.400 €/Jahr)</li>
+          <li>Transkriptionen &amp; Ressourcen im Memberbereich</li>
+          <li>Kickoff-Analyse &amp; Wachstumsfahrplan</li>
+          <li>Community &amp; Unternehmer-Netzwerk</li>
+          <li>Erste-Session-Garantie</li>
+        </ul>
+      </div>
+      <div class="vt-price-wrap">
+        <div class="vt-was">Gesamtwert: ~65.000 €</div>
+        <div class="vt-price">2.000 €</div>
+        <div class="vt-per">/ Monat netto · Jahresvertrag</div>
+        <a href="#formular" class="vt-btn">Jetzt sichern →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAST WIN -->
+<section class="fastwin">
+  <div class="fw-inner">
+    <div>
+      <div class="fw-tag">Von heute bis zum ersten Ergebnis</div>
+      <h2 class="fw-h">Dein erster konkreter Schritt:<br>in 7 Tagen.</h2>
+      <p class="fw-p">Wir wissen: der größte Wert entsteht durch schnelle Wins. Deshalb ist unser System so gebaut, dass du in der ersten Woche bereits eine umsetzbare Antwort auf dein dringendstes Problem bekommst – nicht nach einem Monat Onboarding.</p>
+    </div>
+    <div class="fw-steps">
+      <div class="fw-step">
+        <div class="fw-n">01</div>
+        <div>
+          <div class="fw-sh">Gespräch buchen (heute)</div>
+          <div class="fw-sp">Unser Team ruft dich innerhalb 24h an. Ehrliche Analyse, kein Verkaufsdruck.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-n">02</div>
+        <div>
+          <div class="fw-sh">Kickoff &amp; Analyse (Woche 1)</div>
+          <div class="fw-sp">Wir identifizieren deinen größten Engpass. Du weißt sofort, wo der Hebel liegt.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-n">03</div>
+        <div>
+          <div class="fw-sh">Frage einschicken (bis Donnerstag)</div>
+          <div class="fw-sp">Dein dringlichstes Problem auf die Agenda. Wir bereiten uns vor.</div>
+        </div>
+      </div>
+      <div class="fw-step">
+        <div class="fw-n">04</div>
+        <div>
+          <div class="fw-sh">Live-Antwort (Mittwoch)</div>
+          <div class="fw-sp">Vier Experten, eine Stunde, konkrete Schritte. Kein Bullshit, keine Theorie.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec team">
+  <div class="sec-inner">
+    <span class="tag fi">Das Team</span>
+    <h2 class="h2 fi" style="margin-bottom:14px;">Vier Experten. Vier Blickwinkel.<br>Keine <span class="green">One-Man-Show.</span></h2>
+    <p class="sec-sub fi">Ein einzelner Berater hat nie alle Antworten. Wir kombinieren vier Expertisen aus der Praxis – und decken alle Wachstumsfelder ab.</p>
+    <div class="team-grid">
+      <div class="team-card fi">
+        <div class="team-av">ES</div>
+        <div class="team-body">
+          <div class="team-name">Eta Sheidaei</div>
+          <div class="team-role">Strategie & Business Architecture</div>
+          <p class="team-bio">CMO-Erfahrung trifft McKinsey-Denke. Eta zerlegt komplexe Wachstumsfragen in klare Entscheidungen und sorgt dafür, dass Strategie, Zahlen und Umsetzung sauber zusammenlaufen.</p>
+        </div>
+      </div>
+      <div class="team-card fi">
+        <div class="team-av">AA</div>
+        <div class="team-body">
+          <div class="team-name">Adnan Aydogdu</div>
+          <div class="team-role">Marketing & Funnel-Strategie</div>
+          <p class="team-bio">Digitaler Marketer, CMO und Unternehmer. Adnan übersetzt Visionen in skalierbare digitale Marketing-Systeme, die planbar Leads, Termine und Kunden für wachsende Unternehmen liefern.</p>
+        </div>
+      </div>
+      <div class="team-card fi">
+        <div class="team-av">CM</div>
+        <div class="team-body">
+          <div class="team-name">Carsten Murscheid</div>
+          <div class="team-role">Sales & Vertriebssysteme</div>
+          <p class="team-bio">Verkäufer und Unternehmer aus Überzeugung. Carsten denkt in Deals, Margen und Pipeline – und weiß genau, welche Gespräche und Prozesse am Ende wirklich Umsatz bringen.</p>
+        </div>
+      </div>
+      <div class="team-card fi">
+        <div class="team-av">BH</div>
+        <div class="team-body">
+          <div class="team-name">Bastian Höck</div>
+          <div class="team-role">Sales & Leadership</div>
+          <p class="team-bio">Bastian führt als Geschäftsführer konsequent durch die Sales-Brille. Er baut klare Strukturen für Vertriebsteams, schärft Angebote und sorgt dafür, dass jedes Gespräch in Richtung Abschluss geführt wird.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM PHOTO -->
+<section class="team-photo">
+  <div class="team-photo-inner">
+    <img src="team-foto.jpeg" alt="Das Team der Wachstumshelden" class="team-photo-img fi">
+    <p class="team-photo-caption">Bastian Höck · Eta Sheidaei · Adnan Aydogdu · Carsten Murscheid</p>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guarantee">
+  <div class="sec-inner">
+    <div class="guar-inner">
+      <div>
+        <div class="guar-badge">
+          <div class="guar-badge-icon">🛡</div>
+          <div class="guar-badge-text">Erste-Session<br>Garantie</div>
+        </div>
+        <h2 class="guar-h">Kein Risiko.<br><span class="g">Wir liefern – oder du zahlst nicht.</span></h2>
+        <p class="guar-p">Wir sind so überzeugt, dass du in deiner ersten Live-Session eine direkt umsetzbare Antwort auf deinen größten Engpass bekommst – dass wir es garantieren. Wenn nicht, bekommst du den ersten Monat vollständig zurück.</p>
+        <p class="guar-fine">* Gilt für Teilnehmer, die ihre Frage bis Donnerstag einschicken und an der ersten Session teilnehmen.</p>
+      </div>
+      <div class="guar-list">
+        <div class="guar-item fi">
+          <div class="guar-ico">💡</div>
+          <div>
+            <div class="guar-ih">Sofort umsetzbare Antwort</div>
+            <div class="guar-ip">Keine Theorie, kein "es kommt drauf an". Klare Schritte, die du nächste Woche umsetzen kannst.</div>
+          </div>
+        </div>
+        <div class="guar-item fi">
+          <div class="guar-ico">🎯</div>
+          <div>
+            <div class="guar-ih">Auf deinen Engpass zugeschnitten</div>
+            <div class="guar-ip">Wir lesen deine Frage vorab. Die Session ist vorbereitet – nicht improvisiert.</div>
+          </div>
+        </div>
+        <div class="guar-item fi">
+          <div class="guar-ico">💰</div>
+          <div>
+            <div class="guar-ih">Erster Monat zurück wenn nicht</div>
+            <div class="guar-ip">Kein Kleingedrucktes. Wenn wir nicht liefern, zahlst du nicht. So einfach.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec pricing">
+  <div class="sec-inner">
+    <span class="tag fi">Investition</span>
+    <h2 class="h2 fi" style="margin-bottom:14px;">Klar. Transparent.<br>Ohne Verstecktes.</h2>
+    <p class="sec-sub fi">Ein Neukunde im B2B deckt die Investition. Kannst du es dir leisten, es nicht zu tun?</p>
+    <div class="pricing-cards">
+      <div class="price-card fi">
+        <div class="price-period">Monatlich</div>
+        <div class="price-amount">2.000 € <sub>/ Monat</sub></div>
+        <p class="price-note">Netto zzgl. MwSt. · Jahresvertrag</p>
+        <ul class="price-features">
+          <li>52× wöchentliche Live-Sessions</li>
+          <li>Alle 5 Wachstumsfelder</li>
+          <li>Transkriptionen &amp; Ressourcen im Memberbereich</li>
+          <li>Fragen wöchentlich einreichen</li>
+          <li>Erste-Session-Garantie</li>
+        </ul>
+        <a href="#formular" class="price-btn">Gespräch sichern</a>
+      </div>
+      <div class="price-card featured fi">
+        <div class="price-badge">Bis zu 2 Monate gratis</div>
+        <div class="price-period">Jährlich</div>
+        <div class="price-amount" style="color:white;">20.000 € <sub>/ Jahr</sub></div>
+        <p class="price-note">Netto zzgl. MwSt. · Einmalzahlung</p>
+        <ul class="price-features">
+          <li>Alles aus dem Monatspaket</li>
+          <li>Priorität bei Fragen-Auswahl</li>
+          <li>Voller Jahres-Zugang gesichert</li>
+          <li>~1.667 € effektiv pro Monat</li>
+          <li>Erste-Session-Garantie</li>
+        </ul>
+        <a href="#formular" class="price-btn">Jahrespaket anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq">
+  <div class="sec-inner">
+    <span class="tag fi">FAQ</span>
+    <h2 class="h2 fi" style="margin-bottom:14px;">Klare Antworten.</h2>
+    <p class="sec-sub fi">Weil gute Entscheidungen klare Informationen brauchen.</p>
+    <div class="faq-grid">
+      <div class="faq-card fi">
+        <div class="faq-q">Ist das ein Kurs oder ein Coaching?</div>
+        <div class="faq-a">Weder noch. Es ist wöchentliche Expertenberatung – live, auf deine Fragen zugeschnitten, ohne Lehrplan. Du bringst dein aktuelles Problem, wir liefern den nächsten Schritt.</div>
+      </div>
+      <div class="faq-card fi">
+        <div class="faq-q">Wie viel Zeit brauche ich pro Woche?</div>
+        <div class="faq-a">Mindestens eine Stunde für die Live-Session. Plus die Zeit für die Umsetzung. Das ist kein Programm für Zuschauer – wer nichts umsetzt, wird nichts verändern.</div>
+      </div>
+      <div class="faq-card fi">
+        <div class="faq-q">Was wenn ich mal nicht live dabei sein kann?</div>
+        <div class="faq-a">Jede Session wird transkribiert und die Ressourcen im Memberbereich bereitgestellt. Deine Frage können wir trotzdem beantworten – schick sie rechtzeitig bis Donnerstag ein.</div>
+      </div>
+      <div class="faq-card fi">
+        <div class="faq-q">Für welche Unternehmensgröße ist das?</div>
+        <div class="faq-a">Primär für Geschäftsführer und Unternehmer mit 5–50 Mitarbeitern, die ein stabiles Fundament haben und auf die nächste Stufe wollen.</div>
+      </div>
+      <div class="faq-card fi">
+        <div class="faq-q">Was sind die Vertragskonditionen?</div>
+        <div class="faq-a">Jahresvertrag – monatlich à 2.000 € netto oder einmalig 20.000 € netto (spart ~4.000 €). Echte Ergebnisse brauchen Zeit – deshalb arbeiten wir bewusst mit Jahresverträgen.</div>
+      </div>
+      <div class="faq-card fi">
+        <div class="faq-q">Ist das ZFU-pflichtiger Fernunterricht?</div>
+        <div class="faq-a">Nein. Keine Lehrpläne, keine Prüfungen, keine Zertifikate. Wachstumshelden ist unternehmerische Begleitung und Sparring – kein Fernunterricht im Sinne des FernUSG.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <span class="final-tag">Jetzt ist der richtige Zeitpunkt</span>
+  <h2 class="final-h">
+    Jeder Monat ohne Klarheit<br>
+    kostet dich <span class="o">Wachstum,</span><br>
+    das du nie zurückholst.
+  </h2>
+  <p class="final-p">Der richtige Moment ist nicht wenn der Markt besser wird. Er ist jetzt. Buch dir das Gespräch – unverbindlich, Anruf in 24h.</p>
+  <a href="#formular" class="btn" style="padding:18px 48px;font-size:15px;">Jetzt Strategiegespräch sichern →</a>
+  <p class="final-note">Unverbindlich · Kein Kurs · Keine Theorie · Erste-Session-Garantie</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Die <span>Wachstums</span>helden</div>
+  <div class="foot-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">AGB</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+document.getElementById('leadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+document.querySelectorAll('a[href="#formular"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('formular').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+});
+</script>
+</body>
+</html>
