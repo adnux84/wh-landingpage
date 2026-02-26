@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wachstumshelden – Lead Flow Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:   #001639;
+  --green:  #45AF7D;
+  --orange: #F97316;
+  --light:  #F9FAFB;
+  --mid:    #E5E7EB;
+  --dark:   #111827;
+  --gray:   #6B7280;
+  --white:  #ffffff;
+  --red:    #EF4444;
+  --purple: #8B5CF6;
+  --teal:   #0EA5E9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: #0A0F1E;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(69,175,125,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(69,175,125,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.wrapper {
+  position: relative; z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.header-left {}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.title span { color: var(--green); }
+
+.subtitle {
+  font-size: 14px;
+  color: var(--gray);
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9CA3AF;
+}
+
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── VARIANT TABS ── */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--gray);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.tab:hover { border-color: var(--green); color: var(--white); }
+.tab.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+/* ── VARIANT PANEL ── */
+.variant-panel { display: none; }
+.variant-panel.active { display: block; }
+
+/* ── VARIANT HEADER ── */
+.variant-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 3px solid var(--green);
+  border-radius: 0 10px 10px 0;
+}
+
+.variant-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(69,175,125,0.15);
+  color: var(--green);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.variant-badge.orange {
+  background: rgba(249,115,22,0.15);
+  color: var(--orange);
+}
+
+.variant-badge.purple {
+  background: rgba(139,92,246,0.15);
+  color: var(--purple);
+}
+
+.variant-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.variant-desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* ── FLOW ── */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+}
+
+/* connector between rows */
+.flow-connector-v {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+  position: relative;
+  min-height: 32px;
+  align-items: center;
+}
+
+.flow-connector-v::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(69,175,125,0.6), rgba(69,175,125,0.2));
+  transform: translateX(-50%);
+}
+
+.arrow-down {
+  width: 24px; height: 24px;
+  background: rgba(69,175,125,0.15);
+  border: 1px solid rgba(69,175,125,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  font-size: 10px;
+  color: var(--green);
+}
+
+/* horizontal connector */
+.h-connector {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  position: relative;
+}
+
+.h-connector::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(69,175,125,0.5), rgba(69,175,125,0.2));
+}
+
+.h-arrow {
+  width: 20px; height: 20px;
+  background: rgba(69,175,125,0.15);
+  border: 1px solid rgba(69,175,125,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  font-size: 9px;
+  color: var(--green);
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+/* ── NODE ── */
+.node {
+  flex: 1;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+  min-width: 0;
+}
+
+.node:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.node.blue   { border-color: rgba(0,22,57,0.8);  background: rgba(0,22,57,0.6); }
+.node.green  { border-color: rgba(69,175,125,0.4); background: rgba(69,175,125,0.08); }
+.node.orange { border-color: rgba(249,115,22,0.4); background: rgba(249,115,22,0.08); }
+.node.purple { border-color: rgba(139,92,246,0.4); background: rgba(139,92,246,0.08); }
+.node.teal   { border-color: rgba(14,165,233,0.4); background: rgba(14,165,233,0.08); }
+.node.gray   { border-color: rgba(107,114,128,0.4); background: rgba(107,114,128,0.08); }
+.node.red    { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.08); }
+
+.node-icon {
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.node-tool {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.node.blue   .node-tool { color: #60A5FA; }
+.node.green  .node-tool { color: var(--green); }
+.node.orange .node-tool { color: var(--orange); }
+.node.purple .node-tool { color: var(--purple); }
+.node.teal   .node-tool { color: var(--teal); }
+.node.gray   .node-tool { color: var(--gray); }
+.node.red    .node-tool { color: var(--red); }
+
+.node-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.node-desc {
+  font-size: 11px;
+  color: #9CA3AF;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.node-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.node.green  .node-tag { background: rgba(69,175,125,0.2); color: var(--green); }
+.node.orange .node-tag { background: rgba(249,115,22,0.2); color: var(--orange); }
+.node.purple .node-tag { background: rgba(139,92,246,0.2); color: var(--purple); }
+.node.teal   .node-tag { background: rgba(14,165,233,0.2); color: var(--teal); }
+.node.blue   .node-tag { background: rgba(96,165,250,0.15); color: #60A5FA; }
+.node.gray   .node-tag { background: rgba(107,114,128,0.2); color: var(--gray); }
+
+/* multi-node row */
+.flow-row.multi {
+  gap: 12px;
+}
+
+/* branch labels */
+.branch-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.branch-yes { background: rgba(69,175,125,0.2); color: var(--green); }
+.branch-no  { background: rgba(239,68,68,0.2); color: var(--red); }
+
+/* split connector */
+.split-connector {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0 20px;
+  margin: 4px 0;
+  min-height: 36px;
+}
+
+.split-connector::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 30%; right: 30%;
+  height: 2px;
+  background: rgba(69,175,125,0.4);
+}
+
+.split-leg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.split-leg::before {
+  content: '';
+  width: 2px;
+  height: 28px;
+  background: rgba(69,175,125,0.4);
+  display: block;
+}
+
+.split-leg-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+
+/* merge connector */
+.merge-connector {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 20px;
+  min-height: 36px;
+  margin: 4px 0;
+}
+
+.merge-connector::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 30%; right: 30%;
+  height: 2px;
+  background: rgba(249,115,22,0.4);
+}
+
+.merge-leg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.merge-leg::after {
+  content: '';
+  width: 2px;
+  height: 28px;
+  background: rgba(249,115,22,0.4);
+  display: block;
+}
+
+/* ── PRO/CON TABLE ── */
+.analysis {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.analysis-card {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+
+.analysis-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.analysis-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analysis-card li {
+  font-size: 12px;
+  color: #9CA3AF;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.analysis-card li::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--gray);
+}
+
+.pro li::before { color: var(--green); }
+.con li::before { color: var(--red); }
+
+.rec-box {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(69,175,125,0.08);
+  border: 1px solid rgba(69,175,125,0.25);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #D1FAE5;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.rec-box strong {
+  color: var(--green);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── COMPARISON TABLE ── */
+.compare-section {
+  margin-top: 56px;
+}
+
+.compare-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+
+.compare-title span { color: var(--green); }
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.compare-table th {
+  background: rgba(255,255,255,0.06);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #D1D5DB;
+  font-weight: 400;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.compare-table tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+
+.compare-table td:first-child {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.badge-green  { color: var(--green); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+.badge-orange { color: var(--orange); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+.badge-purple { color: var(--purple); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+
+.winner-row td { background: rgba(69,175,125,0.06) !important; }
+.winner-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(69,175,125,0.2);
+  color: var(--green);
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  margin-left: 8px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .wrapper { padding: 32px 16px 60px; }
+  .flow-row.multi { flex-direction: column; }
+  .h-connector { transform: rotate(90deg); min-height: 32px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">// Lead Flow Architecture</div>
+      <div class="title">Wachstumshelden<br><span>Lead Flow Plan</span></div>
+      <div class="subtitle">3 Varianten · Meta Ads → Onepage.io → Klaviyo → Pipedrive → Ablefy</div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#60A5FA"></div> Traffic / Ads</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#45AF7D"></div> Formular / Capture</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div> CRM / Automation</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div> Middleware</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0EA5E9"></div> Email Marketing</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6B7280"></div> Abschluss / Payment</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showVariant('v1')">Variante 1 · Native</button>
+    <button class="tab" onclick="showVariant('v2')">Variante 2 · Zapier Bridge</button>
+    <button class="tab" onclick="showVariant('v3')">Variante 3 · Typeform Hub</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- VARIANTE 1 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="variant-panel active" id="v1">
+    <div class="variant-header">
+      <div>
+        <div class="variant-badge">Empfohlen zum Start</div>
+        <div class="variant-title">Native Onepage.io Formular</div>
+        <div class="variant-desc">Onepage.io Formular → Webhook direkt zu Klaviyo & Pipedrive · Kein Middleware nötig · Schnellste Implementierung</div>
+      </div>
+    </div>
+
+    <div class="flow">
+
+      <!-- ROW 1: Ad -->
+      <div class="flow-row">
+        <div class="node blue">
+          <span class="node-icon">📣</span>
+          <div class="node-tool">Meta Ads Manager</div>
+          <div class="node-title">Meta Ad</div>
+          <div class="node-desc">Static / Video / Carousel → CTA "Jetzt bewerben" oder "Strategiegespräch sichern"</div>
+          <div class="node-tag">Cold Audience · Retargeting</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <!-- ROW 2: LP -->
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">🌐</span>
+          <div class="node-tool">Onepage.io</div>
+          <div class="node-title">Landingpage</div>
+          <div class="node-desc">Value Stack → Team → Pricing → Garantie → CTA-Button öffnet eingebettetes Formular</div>
+          <div class="node-tag">Meta Pixel aktiv</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <!-- ROW 3: Formular -->
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">📋</span>
+          <div class="node-tool">Onepage.io · Native Form</div>
+          <div class="node-title">Qualifizierungsformular</div>
+          <div class="node-desc">Name · Email · Telefon · Unternehmen · Mitarbeiterzahl · Hauptproblem (Dropdown) · Wann entscheiden Sie?</div>
+          <div class="node-tag">Webhook konfigurierbar</div>
+        </div>
+      </div>
+
+      <!-- SPLIT -->
+      <div class="split-connector">
+        <div class="split-leg"><div class="split-leg-label">Klaviyo</div></div>
+        <div class="split-leg"><div class="split-leg-label">Pipedrive</div></div>
+      </div>
+
+      <!-- ROW 4: Parallel -->
+      <div class="flow-row multi">
+        <div class="node teal">
+          <span class="node-icon">✉️</span>
+          <div class="node-tool">Klaviyo</div>
+          <div class="node-title">Nurture Sequence</div>
+          <div class="node-desc">
+            <strong style="color:#fff;font-size:12px">Email 1 (sofort):</strong> Bestätigung + Kalender-Link<br>
+            <strong style="color:#fff;font-size:12px">Email 2 (Tag 1):</strong> Team-Vorstellung + Credibility<br>
+            <strong style="color:#fff;font-size:12px">Email 3 (Tag 3):</strong> FAQ + Einwandbehandlung<br>
+            <strong style="color:#fff;font-size:12px">Email 4 (Tag 6):</strong> Urgency + letzte Plätze
+          </div>
+          <div class="node-tag">Flow: "Wachstumshelden Lead"</div>
+        </div>
+
+        <div class="node orange">
+          <span class="node-icon">🎯</span>
+          <div class="node-tool">Pipedrive</div>
+          <div class="node-title">Deal erstellt</div>
+          <div class="node-desc">
+            Stage: <em>Neuer Lead</em><br>
+            Formular-Felder → Custom Fields<br>
+            Owner: Carsten / Bastian<br>
+            Automatische Aufgabe: "Call in 24h"
+          </div>
+          <div class="node-tag">Pipeline: Wachstumshelden</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <!-- ROW 5: Sales Call -->
+      <div class="flow-row">
+        <div class="node orange">
+          <span class="node-icon">📞</span>
+          <div class="node-tool">Pipedrive · Stage 2</div>
+          <div class="node-title">Sales Call (Carsten / Bastian)</div>
+          <div class="node-desc">Diagnose → Value Stack → Preis → Close</div>
+          <div class="node-tag">Leitfaden V2</div>
+        </div>
+      </div>
+
+      <!-- SPLIT: Won / Lost -->
+      <div class="split-connector">
+        <div class="split-leg"><div class="split-leg-label" style="color:#45AF7D">✓ Deal Won</div></div>
+        <div class="split-leg"><div class="split-leg-label" style="color:#EF4444">✗ Deal Lost</div></div>
+      </div>
+
+      <div class="flow-row multi">
+        <div class="node green">
+          <span class="node-icon">🏆</span>
+          <div class="node-tool">Ablefy</div>
+          <div class="node-title">Payment + Onboarding</div>
+          <div class="node-desc">Zahlungslink senden · Ablefy-Zugangsdaten · Mitgliederbereich freischalten · Welcome-Paket (Eta)</div>
+          <div class="node-tag">Jahresvertrag · 20.000€</div>
+        </div>
+
+        <div class="node red">
+          <span class="node-icon">🔄</span>
+          <div class="node-tool">Klaviyo · Nurture</div>
+          <div class="node-title">Lost-Sequence</div>
+          <div class="node-desc">Deal Lost in Pipedrive → Klaviyo Segment "Lost" → 90-Tage Nurture · Ergebnis-Updates · Reaktivierungsangebot</div>
+          <div class="node-tag">Reaktivierbar</div>
+        </div>
+      </div>
+
+    </div><!-- /flow -->
+
+    <div class="analysis">
+      <div class="analysis-card pro">
+        <h4 style="color:#45AF7D">✓ Vorteile</h4>
+        <ul>
+          <li>Keine zusätzlichen Tools nötig (kein Zapier)</li>
+          <li>Geringste monatliche Kosten</li>
+          <li>Einrichtung in einem Tag möglich</li>
+          <li>Onepage.io Webhooks stabil und dokumentiert</li>
+          <li>Meta Pixel bleibt auf einer Domain</li>
+        </ul>
+      </div>
+      <div class="analysis-card con">
+        <h4 style="color:#EF4444">✗ Nachteile</h4>
+        <ul>
+          <li>Onepage.io Native Forms sind weniger flexibel</li>
+          <li>Begrenzte Conditional Logic im Formular</li>
+          <li>Klaviyo-Anbindung erfordert API-Key Setup</li>
+          <li>Kein automatisches Lead-Scoring möglich</li>
+        </ul>
+      </div>
+      <div class="rec-box">
+        <strong>// Empfehlung</strong>
+        Beste Option für den Launch. Sofort einsatzbereit, keine Tool-Abhängigkeiten. Sobald Lead-Volumen wächst → Upgrade auf Variante 2.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- VARIANTE 2 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="variant-panel" id="v2">
+    <div class="variant-header">
+      <div>
+        <div class="variant-badge orange">Skalier-Variante</div>
+        <div class="variant-title">Zapier als zentrales Nervensystem</div>
+        <div class="variant-desc">Onepage.io Form → Zapier → Klaviyo + Pipedrive + optional Slack · Maximale Flexibilität · Empfohlen ab 20+ Leads/Monat</div>
+      </div>
+    </div>
+
+    <div class="flow">
+
+      <div class="flow-row">
+        <div class="node blue">
+          <span class="node-icon">📣</span>
+          <div class="node-tool">Meta Ads Manager</div>
+          <div class="node-title">Meta Ad</div>
+          <div class="node-desc">Traffic → LP. UTM-Parameter für Source-Tracking in Zapier weitergeben (utm_source, utm_campaign, utm_adset)</div>
+          <div class="node-tag">UTM Tracking aktiv</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">🌐</span>
+          <div class="node-tool">Onepage.io</div>
+          <div class="node-title">Landingpage + Formular</div>
+          <div class="node-desc">Formular Submit → Webhook-URL zeigt auf Zapier Catch Hook</div>
+          <div class="node-tag">Webhook → Zapier</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <!-- ZAPIER HUB -->
+      <div class="flow-row">
+        <div class="node purple">
+          <span class="node-icon">⚡</span>
+          <div class="node-tool">Zapier · Multi-Step Zap</div>
+          <div class="node-title">Automatisierungs-Hub</div>
+          <div class="node-desc">
+            <strong style="color:#fff;font-size:11px">Trigger:</strong> Webhook (Formular Submit)<br>
+            <strong style="color:#fff;font-size:11px">Filter:</strong> Nur wenn Email nicht leer<br>
+            <strong style="color:#fff;font-size:11px">Step 1:</strong> Klaviyo → Subscriber anlegen + Tag setzen<br>
+            <strong style="color:#fff;font-size:11px">Step 2:</strong> Pipedrive → Person + Deal erstellen<br>
+            <strong style="color:#fff;font-size:11px">Step 3:</strong> Slack DM → Carsten/Bastian (optional)
+          </div>
+          <div class="node-tag">~15-20€/Monat · Starter Plan</div>
+        </div>
+      </div>
+
+      <div class="split-connector">
+        <div class="split-leg"><div class="split-leg-label">Klaviyo</div></div>
+        <div class="split-leg"><div class="split-leg-label">Pipedrive</div></div>
+        <div class="split-leg"><div class="split-leg-label">Slack (opt.)</div></div>
+      </div>
+
+      <div class="flow-row multi">
+        <div class="node teal">
+          <span class="node-icon">✉️</span>
+          <div class="node-tool">Klaviyo</div>
+          <div class="node-title">Segmentierter Flow</div>
+          <div class="node-desc">Zapier setzt Tags: "5-10 MA", "Marketing-Problem", "Sales-Problem" → Klaviyo liefert segment-spezifische Sequenz</div>
+          <div class="node-tag">Personalisiert nach Formular</div>
+        </div>
+
+        <div class="node orange">
+          <span class="node-icon">🎯</span>
+          <div class="node-tool">Pipedrive</div>
+          <div class="node-title">Lead + Scoring</div>
+          <div class="node-desc">UTM-Source als Custom Field · Mitarbeiterzahl als Score-Faktor · Auto-Aktivität: Call innerhalb 1h</div>
+          <div class="node-tag">Lead-Score automatisiert</div>
+        </div>
+
+        <div class="node gray">
+          <span class="node-icon">💬</span>
+          <div class="node-tool">Slack (optional)</div>
+          <div class="node-title">Sofort-Alert</div>
+          <div class="node-desc">DM an Carsten + Bastian mit Lead-Details. Speed-to-Contact unter 5 Min. = 21x höhere Qualifizierungsrate</div>
+          <div class="node-tag">Optional · empfohlen</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node orange">
+          <span class="node-icon">📞</span>
+          <div class="node-tool">Pipedrive · Stage 2</div>
+          <div class="node-title">Sales Call</div>
+          <div class="node-desc">Alle Lead-Infos aus Formular sichtbar in Pipedrive. Caller sieht Hauptproblem, Mitarbeiterzahl, Ad-Source vor dem Gespräch.</div>
+          <div class="node-tag">Vorbereitet · informiert</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">🏆</span>
+          <div class="node-tool">Ablefy + Zapier</div>
+          <div class="node-title">Deal Won → Auto-Onboarding</div>
+          <div class="node-desc">Pipedrive Deal Won → Zapier → Ablefy Mitglied anlegen → Klaviyo "Onboarding" Flow starten → Welcome-Email Sequenz</div>
+          <div class="node-tag">Vollautomatisiert</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="analysis">
+      <div class="analysis-card pro">
+        <h4 style="color:#45AF7D">✓ Vorteile</h4>
+        <ul>
+          <li>Maximale Flexibilität – jeder Schritt anpassbar</li>
+          <li>UTM-Tracking durchgehend bis zum Deal</li>
+          <li>Segmentierte Klaviyo-Sequences möglich</li>
+          <li>Sofort-Alert für Speed-to-Contact</li>
+          <li>Onboarding nach Deal Won automatisierbar</li>
+          <li>Zukunftssicher bei mehr Lead-Volumen</li>
+        </ul>
+      </div>
+      <div class="analysis-card con">
+        <h4 style="color:#EF4444">✗ Nachteile</h4>
+        <ul>
+          <li>Zusätzliche Kosten: ~15-20€/Monat Zapier</li>
+          <li>Mehr Setup-Aufwand initial (2-3 Tage)</li>
+          <li>Mehr Fehlerquellen (Webhook, Zap-Steps)</li>
+          <li>Zapier-Limits beim Starter Plan (750 Tasks/Monat)</li>
+        </ul>
+      </div>
+      <div class="rec-box">
+        <strong>// Empfehlung</strong>
+        Zapier war ohnehin geplant. Für die Skalierungsphase ab ~20 Leads/Monat die überlegene Variante. UTM-Tracking allein rechtfertigt den Aufwand.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- VARIANTE 3 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="variant-panel" id="v3">
+    <div class="variant-header">
+      <div>
+        <div class="variant-badge purple">Qualifizierungs-Variante</div>
+        <div class="variant-title">Typeform als Qualifizierungsfilter</div>
+        <div class="variant-desc">Onepage.io → Typeform (Multi-Step Bewerbung) → Zapier → Klaviyo + Pipedrive · Nur qualifizierte Leads kommen in die Pipeline</div>
+      </div>
+    </div>
+
+    <div class="flow">
+
+      <div class="flow-row">
+        <div class="node blue">
+          <span class="node-icon">📣</span>
+          <div class="node-tool">Meta Ads Manager</div>
+          <div class="node-title">Meta Ad</div>
+          <div class="node-desc">CTA: "Bewerbung einreichen" statt "Strategiegespräch buchen" → höherer Intent Filter bereits in der Ad</div>
+          <div class="node-tag">Application-Funnel Framing</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">🌐</span>
+          <div class="node-tool">Onepage.io</div>
+          <div class="node-title">Landingpage</div>
+          <div class="node-desc">CTA-Button leitet zu Typeform weiter (neues Tab oder Embed). Alternativ: Typeform-Embed direkt in Onepage.</div>
+          <div class="node-tag">Redirect zu Typeform</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node purple">
+          <span class="node-icon">📝</span>
+          <div class="node-tool">Typeform · Multi-Step</div>
+          <div class="node-title">Bewerbungsformular (5-7 Schritte)</div>
+          <div class="node-desc">
+            1. Grunddaten (Name, Email, Tel, Unternehmen)<br>
+            2. Mitarbeiter + Jahresumsatz (Dropdown)<br>
+            3. Hauptproblem (Marketing / Sales / Beides)<br>
+            4. Was haben Sie bisher versucht?<br>
+            5. Warum jetzt? Was ändert sich wenn nicht?<br>
+            6. Wann können Sie entscheiden?<br>
+            7. Kalender-Link (Calendly/embedded)
+          </div>
+          <div class="node-tag">Logic Jumps · Conditional Fields</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node purple">
+          <span class="node-icon">⚡</span>
+          <div class="node-tool">Zapier · Typeform Trigger</div>
+          <div class="node-title">Automatischer Score</div>
+          <div class="node-desc">
+            Typeform Submit → Zapier Filter:<br>
+            <strong style="color:#fff;font-size:11px">Qualifiziert wenn:</strong> Umsatz &gt; X · Mitarbeiter &gt; 5 · Entscheidung "kurzfristig"<br>
+            <strong style="color:#fff;font-size:11px">Score A:</strong> → Pipedrive + Klaviyo sofort<br>
+            <strong style="color:#fff;font-size:11px">Score B:</strong> → Klaviyo Nurture, kein Call
+          </div>
+          <div class="node-tag">Auto-Qualifizierung</div>
+        </div>
+      </div>
+
+      <div class="split-connector">
+        <div class="split-leg"><div class="split-leg-label" style="color:#45AF7D">Score A · Qualifiziert</div></div>
+        <div class="split-leg"><div class="split-leg-label" style="color:#EF4444">Score B · Nurture</div></div>
+      </div>
+
+      <div class="flow-row multi">
+        <div class="node orange">
+          <span class="node-icon">🎯</span>
+          <div class="node-tool">Pipedrive · High Priority</div>
+          <div class="node-title">Sofort-Call</div>
+          <div class="node-desc">Alle Antworten aus Typeform als Gesprächsvorbereitung direkt in Pipedrive. Bastian/Carsten kennen den Lead vor dem ersten Wort.</div>
+          <div class="node-tag">Voll vorbereitet</div>
+        </div>
+
+        <div class="node teal">
+          <span class="node-icon">✉️</span>
+          <div class="node-tool">Klaviyo · Nurture</div>
+          <div class="node-title">Langzeit-Nurture</div>
+          <div class="node-desc">Score-B Leads bekommen 90-Tage Sequence. Nach 90 Tagen erneute Qualifizierungs-Email. Kein Sales-Call-Aufwand.</div>
+          <div class="node-tag">Kein verlorener Lead</div>
+        </div>
+      </div>
+
+      <div class="flow-connector-v"><div class="arrow-down">↓</div></div>
+
+      <div class="flow-row">
+        <div class="node green">
+          <span class="node-icon">🏆</span>
+          <div class="node-tool">Ablefy</div>
+          <div class="node-title">Onboarding</div>
+          <div class="node-desc">Deal Won → Ablefy Zugang · Klaviyo Onboarding-Flow · Welcome-Paket</div>
+          <div class="node-tag">Mitgliederbereich live</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="analysis">
+      <div class="analysis-card pro">
+        <h4 style="color:#45AF7D">✓ Vorteile</h4>
+        <ul>
+          <li>Nur echte Kaufinteressenten kommen in die Pipeline</li>
+          <li>Caller kennt den Lead komplett vor dem Call</li>
+          <li>Application-Funnel = höhere Perceived Value</li>
+          <li>Weniger schlechte Calls = mehr Energie für gute</li>
+          <li>B-Leads gehen nicht verloren, kosten aber keine Zeit</li>
+        </ul>
+      </div>
+      <div class="analysis-card con">
+        <h4 style="color:#EF4444">✗ Nachteile</h4>
+        <ul>
+          <li>Höchste Einstiegshürde → weniger Formular-Starts</li>
+          <li>Typeform kostet extra (~25-50€/Monat)</li>
+          <li>Mehr Setup-Aufwand als Variante 1</li>
+          <li>Riskant wenn Ads noch nicht optimiert sind (zu wenig Traffic)</li>
+        </ul>
+      </div>
+      <div class="rec-box">
+        <strong>// Empfehlung</strong>
+        Erst einsetzen wenn Ads-Volumen stabil ist (50+ Leads/Monat). Als Kaltstart-Variante zu restriktiv. Perfekt für Phase 2 wenn Close-Rate optimiert werden soll.
+      </div>
+    </div>
+  </div>
+
+  <!-- VERGLEICHSTABELLE -->
+  <div class="compare-section">
+    <div class="compare-title">Varianten-<span>Vergleich</span></div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Kriterium</th>
+          <th>V1 · Native</th>
+          <th>V2 · Zapier</th>
+          <th>V3 · Typeform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="winner-row">
+          <td>Setup-Zeit</td>
+          <td><span class="badge-green">1 Tag ✓</span></td>
+          <td><span class="badge-orange">2-3 Tage</span></td>
+          <td><span class="badge-purple">3-5 Tage</span></td>
+        </tr>
+        <tr>
+          <td>Monatliche Zusatzkosten</td>
+          <td><span class="badge-green">0 € ✓</span></td>
+          <td><span class="badge-orange">~20 € (Zapier)</span></td>
+          <td><span class="badge-purple">~45 € (Zapier + Typeform)</span></td>
+        </tr>
+        <tr>
+          <td>Lead-Qualität</td>
+          <td>Mittel</td>
+          <td>Mittel–Hoch</td>
+          <td><span class="badge-green">Hoch ✓</span></td>
+        </tr>
+        <tr class="winner-row">
+          <td>Lead-Volumen</td>
+          <td><span class="badge-green">Hoch ✓</span></td>
+          <td><span class="badge-green">Hoch ✓</span></td>
+          <td>Niedriger</td>
+        </tr>
+        <tr>
+          <td>UTM / Attribution</td>
+          <td>Begrenzt</td>
+          <td><span class="badge-green">Vollständig ✓</span></td>
+          <td><span class="badge-green">Vollständig ✓</span></td>
+        </tr>
+        <tr>
+          <td>Vorbereitung auf Sales Call</td>
+          <td>Basis</td>
+          <td>Gut</td>
+          <td><span class="badge-green">Exzellent ✓</span></td>
+        </tr>
+        <tr>
+          <td>Skalierbarkeit</td>
+          <td>Begrenzt</td>
+          <td><span class="badge-green">Hoch ✓</span></td>
+          <td>Mittel</td>
+        </tr>
+        <tr>
+          <td>Empfohlen für</td>
+          <td><span class="badge-green">Launch</span></td>
+          <td><span class="badge-orange">Skalierung</span></td>
+          <td><span class="badge-purple">Optimierung</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- GOOGLE ECOSYSTEM -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="compare-section" style="margin-top:64px">
+
+    <div class="eyebrow" style="margin-bottom:10px">// Google Ecosystem</div>
+    <div class="compare-title">Google <span>Schritt für Schritt</span></div>
+    <p style="font-size:13px;color:#9CA3AF;margin-bottom:32px;font-weight:400;max-width:680px;">SEA macht zum Start keinen Sinn – Wir haben keine Conversion-Daten, kein Quality Score, keine negativen Keywords. Meta gibt uns erst die Lernkurve. Aufbau in 3 Phasen.</p>
+
+    <!-- PHASE TIMELINE -->
+    <div style="display:flex;flex-direction:column;gap:0;margin-bottom:40px">
+
+      <!-- PHASE 1 -->
+      <div style="display:flex;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center;min-width:48px">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(69,175,125,0.2);border:2px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#45AF7D;flex-shrink:0">01</div>
+          <div style="width:2px;flex:1;background:linear-gradient(to bottom,rgba(69,175,125,0.5),rgba(69,175,125,0.1));margin-top:4px"></div>
+        </div>
+        <div style="padding:0 0 32px 20px;flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:15px;font-weight:700;color:#fff">Phase 1 · Jetzt</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;background:rgba(69,175,125,0.15);color:#45AF7D;border-radius:4px;letter-spacing:0.1em">KOSTENLOS</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+
+            <div class="node teal" style="background:rgba(14,165,233,0.08);border-color:rgba(14,165,233,0.35)">
+              <span class="node-icon">🔧</span>
+              <div class="node-tool" style="color:#0EA5E9">Google Tag Manager</div>
+              <div class="node-title">GTM Setup</div>
+              <div class="node-desc">Einmaliges Script auf Onepage.io. Alle anderen Google-Tags laufen danach über GTM – kein Entwickler nötig.</div>
+              <div class="node-tag" style="background:rgba(14,165,233,0.15);color:#0EA5E9">Basis für alles</div>
+            </div>
+
+            <div class="node teal" style="background:rgba(14,165,233,0.08);border-color:rgba(14,165,233,0.35)">
+              <span class="node-icon">📊</span>
+              <div class="node-tool" style="color:#0EA5E9">Google Analytics 4</div>
+              <div class="node-title">GA4 via GTM</div>
+              <div class="node-desc">Seitenaufrufe, Scroll-Tiefe, Formular-Starts, Formular-Submits als Events tracken. Gratis. Basis für alle Entscheidungen.</div>
+              <div class="node-tag" style="background:rgba(14,165,233,0.15);color:#0EA5E9">Conversion Tracking</div>
+            </div>
+
+            <div class="node teal" style="background:rgba(14,165,233,0.08);border-color:rgba(14,165,233,0.35)">
+              <span class="node-icon">🗺️</span>
+              <div class="node-tool" style="color:#0EA5E9">Google My Business</div>
+              <div class="node-title">Profil optimieren</div>
+              <div class="node-desc">Büro Berlin vollständig ausfüllen. Kategorie: "Unternehmensberatung". Öffnungszeiten, Website-Link, kurze Beschreibung mit Keywords.</div>
+              <div class="node-tag" style="background:rgba(14,165,233,0.15);color:#0EA5E9">Bereits vorhanden</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div style="display:flex;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center;min-width:48px">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(249,115,22,0.2);border:2px solid #F97316;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#F97316;flex-shrink:0">02</div>
+          <div style="width:2px;flex:1;background:linear-gradient(to bottom,rgba(249,115,22,0.5),rgba(249,115,22,0.1));margin-top:4px"></div>
+        </div>
+        <div style="padding:0 0 32px 20px;flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:15px;font-weight:700;color:#fff">Phase 2 · Monat 2–3</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;background:rgba(249,115,22,0.15);color:#F97316;border-radius:4px;letter-spacing:0.1em">GÜNSTIGES RETARGETING</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+
+            <div class="node orange" style="grid-column:span 2">
+              <span class="node-icon">🎯</span>
+              <div class="node-tool">Google Ads · Display & YouTube</div>
+              <div class="node-title">Retargeting Audience aus GA4</div>
+              <div class="node-desc">
+                GA4 erstellt automatisch Audiences aus LP-Besuchern → Google Ads importiert diese.<br><br>
+                <strong style="color:#fff;font-size:11px">Audience 1:</strong> LP-Besucher (alle) → Display Ads "Noch unentschlossen?"<br>
+                <strong style="color:#fff;font-size:11px">Audience 2:</strong> Formular-Start aber kein Submit → Display "Ihr Platz wartet noch"<br>
+                <strong style="color:#fff;font-size:11px">Budget:</strong> 5–10€/Tag reicht, CPM Display sehr günstig<br>
+                <strong style="color:#fff;font-size:11px">Vorteil:</strong> Derselbe Lead sieht euch auf Meta UND auf Google/YouTube → mehr Touchpoints, mehr Vertrauen
+              </div>
+              <div class="node-tag">Multi-Channel Presence · Low Budget</div>
+            </div>
+
+            <div class="node orange">
+              <span class="node-icon">🔗</span>
+              <div class="node-tool">GTM · Conversion Linker</div>
+              <div class="node-title">Cross-Channel Attribution</div>
+              <div class="node-desc">GTM verbindet Meta-Klick mit Google-Conversion. Wir sehen welcher Touchpoint (Meta oder Google) den letzten Push gegeben hat.</div>
+              <div class="node-tag">Attribution sauber</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div style="display:flex;gap:0;align-items:stretch">
+        <div style="display:flex;flex-direction:column;align-items:center;min-width:48px">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(139,92,246,0.2);border:2px solid #8B5CF6;display:flex;align-items:center;justify-content:function flex-start;background:rgba(139,92,246,0.2);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#8B5CF6;flex-shrink:0">03</div>
+        </div>
+        <div style="padding:0 0 0 20px;flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:15px;font-weight:700;color:#fff">Phase 3 · Monat 4+</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;background:rgba(139,92,246,0.15);color:#8B5CF6;border-radius:4px;letter-spacing:0.1em">NUR MIT CONVERSION-DATEN</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+
+            <div class="node purple">
+              <span class="node-icon">🔍</span>
+              <div class="node-tool">Google Ads · Search (SEA)</div>
+              <div class="node-title">Search Ads – erst dann</div>
+              <div class="node-desc">
+                Keywords die Sinn machen:<br>
+                "Unternehmensberatung Geschäftsführer"<br>
+                "Vertrieb Coaching Unternehmen"<br>
+                "Marketing Beratung Mittelstand"<br><br>
+                Voraussetzung: min. 30 Conversions in GA4 damit Googles Smart Bidding funktioniert. Darunter verbrennt ihr Budget.
+              </div>
+              <div class="node-tag">Erst ab 30 Conversions sinnvoll</div>
+            </div>
+
+            <div class="node purple">
+              <span class="node-icon">📈</span>
+              <div class="node-tool">Google Ads · Performance Max</div>
+              <div class="node-title">PMax – optional</div>
+              <div class="node-desc">Kombiniert Search, Display, YouTube, Gmail automatisch. Funktioniert gut wenn Conversion-Daten vorhanden. "Black-Box" – wenig Kontrolle. Für euren Use Case: eher nicht.</div>
+              <div class="node-tag">Optional · Low Control</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phase timeline -->
+
+    <!-- GTM WARUM -->
+    <div style="background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.2);border-left:3px solid #0EA5E9;border-radius:0 10px 10px 0;padding:20px 24px;margin-bottom:24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#0EA5E9;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px">// Warum Google Tag Manager zuerst?</div>
+      <div style="font-size:13px;color:#CBD5E1;line-height:1.7;font-weight:400">
+        GTM ist das zentrale Nervensystem. <strong style="color:#fff">Ein Script auf Onepage.io</strong> – und danach installieren wir Meta Pixel, GA4, Google Ads Conversion Tag, Klaviyo-Tracking und alles weitere <strong style="color:#fff">ohne Entwickler, ohne Onepage-Zugang jedes Mal</strong>. Ändert sich ein Tag, geht das in 2 Minuten im GTM-Interface. Ohne GTM brauchen wir für jeden neuen Tag einen neuen Onepage-Deploy.
+      </div>
+    </div>
+
+    <!-- SETUP REIHENFOLGE -->
+    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px 24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#45AF7D;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">// Setup-Reihenfolge für morgen</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(69,175,125,0.2);border:1px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#45AF7D;flex-shrink:0">1</div>
+          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">GTM Account anlegen → Container-Code auf Onepage.io einfügen</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(69,175,125,0.2);border:1px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#45AF7D;flex-shrink:0">2</div>
+          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">GA4 Property erstellen → via GTM als Tag einrichten</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(69,175,125,0.2);border:1px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#45AF7D;flex-shrink:0">3</div>
+          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">Meta Pixel ebenfalls via GTM ausliefern (statt direkt in Onepage)</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(69,175,125,0.2);border:1px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#45AF7D;flex-shrink:0">4</div>
+          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">Formular-Submit als GA4 Event tracken → Conversion in Google Ads importieren</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(69,175,125,0.2);border:1px solid #45AF7D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#45AF7D;flex-shrink:0">5</div>
+          <div style="font-size:12px;color:#D1D5DB;line-height:1.5">Google My Business Profil vervollständigen (30 Min. Aufwand)</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(139,92,246,0.2);border:1px solid #8B5CF6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#8B5CF6;flex-shrink:0">→</div>
+          <div style="font-size:12px;color:#9CA3AF;line-height:1.5">SEA: erst wenn GA4 min. 30 Formular-Conversions gezählt hat</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /google section -->
+
+</div>
+
+<script>
+function showVariant(id) {
+  document.querySelectorAll('.variant-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
